@@ -18,82 +18,82 @@ import static org.hamcrest.core.Is.is;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ReturnValueTest {
 
-    @LocalServerPort
-    int port;
+  @LocalServerPort
+  int port;
 
-    @BeforeEach
-    void setUp() {
-        RestAssured.port = port;
-    }
+  @BeforeEach
+  void setUp() {
+    RestAssured.port = port;
+  }
 
-    /**
-     * ReturnValueController > string 메서드
-     */
-    @DisplayName("Return Value - ResponseBody String")
-    @Test
-    void string() {
-        RestAssured.given().log().all()
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .when().get("/return-value/message")
-                .then().log().all()
-                .statusCode(HttpStatus.OK.value())
-                .body(is("message"));
-    }
+  /**
+   * ReturnValueController > string 메서드
+   */
+  @DisplayName("Return Value - ResponseBody String")
+  @Test
+  void string() {
+    RestAssured.given().log().all()
+        .accept(MediaType.APPLICATION_JSON_VALUE)
+        .when().get("/return-value/message")
+        .then().log().all()
+        .statusCode(HttpStatus.OK.value())
+        .body(is("message"));
+  }
 
-    /**
-     * ReturnValueController > responseBodyForUser 메서드
-     */
-    @DisplayName("Return Value - ResponseBody User")
-    @Test
-    void responseBodyForUser() {
-        RestAssured.given().log().all()
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .when().get("/return-value/users")
-                .then().log().all()
-                .statusCode(HttpStatus.OK.value())
-                .body("name", is("name"))
-                .body("email", is("email"));
-    }
+  /**
+   * ReturnValueController > responseBodyForUser 메서드
+   */
+  @DisplayName("Return Value - ResponseBody User")
+  @Test
+  void responseBodyForUser() {
+    RestAssured.given().log().all()
+        .accept(MediaType.APPLICATION_JSON_VALUE)
+        .when().get("/return-value/users")
+        .then().log().all()
+        .statusCode(HttpStatus.OK.value())
+        .body("name", is("name"))
+        .body("email", is("email"));
+  }
 
-    /**
-     * ReturnValueController > responseEntity 메서드
-     */
-    @DisplayName("Return Value - ResponseEntity")
-    @Test
-    void responseEntity() {
-        RestAssured.given().log().all()
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .when().get("/return-value/users/1")
-                .then().log().all()
-                .statusCode(HttpStatus.OK.value())
-                .body("name", is("name"))
-                .body("email", is("email"));
-    }
+  /**
+   * ReturnValueController > responseEntity 메서드
+   */
+  @DisplayName("Return Value - ResponseEntity")
+  @Test
+  void responseEntity() {
+    RestAssured.given().log().all()
+        .accept(MediaType.APPLICATION_JSON_VALUE)
+        .when().get("/return-value/users/1")
+        .then().log().all()
+        .statusCode(HttpStatus.OK.value())
+        .body("name", is("name"))
+        .body("email", is("email"));
+  }
 
-    /**
-     * ReturnValueController > responseEntityFor400 메서드
-     */
-    @DisplayName("Return Value - ResponseEntity")
-    @Test
-    void responseEntityFor400() {
-        RestAssured.given().log().all()
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .when().get("/return-value/members")
-                .then().log().all()
-                .statusCode(HttpStatus.BAD_REQUEST.value());
-    }
+  /**
+   * ReturnValueController > responseEntityFor400 메서드
+   */
+  @DisplayName("Return Value - ResponseEntity")
+  @Test
+  void responseEntityFor400() {
+    RestAssured.given().log().all()
+        .accept(MediaType.APPLICATION_JSON_VALUE)
+        .when().get("/return-value/members")
+        .then().log().all()
+        .statusCode(HttpStatus.BAD_REQUEST.value());
+  }
 
-    /**
-     * ReturnValueController > thymeleaf 메서드
-     */
-    @DisplayName("Return Value - Thymeleaf")
-    @Test
-    void thymeleaf() {
-        RestAssured.given().log().all()
-                .accept(MediaType.TEXT_HTML_VALUE)
-                .when().get("/return-value/thymeleaf")
-                .then().log().all()
-                .statusCode(HttpStatus.OK.value())
-                .body(containsString("Hello"));
-    }
+  /**
+   * ReturnValueController > thymeleaf 메서드
+   */
+  @DisplayName("Return Value - Thymeleaf")
+  @Test
+  void thymeleaf() {
+    RestAssured.given().log().all()
+        .accept(MediaType.TEXT_HTML_VALUE)
+        .when().get("/return-value/thymeleaf")
+        .then().log().all()
+        .statusCode(HttpStatus.OK.value())
+        .body(containsString("Hello"));
+  }
 }
